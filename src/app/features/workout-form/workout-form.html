@@ -1,7 +1,21 @@
 <form (ngSubmit)="submit()" class="form">
     <label>
-        Edzés neve
-        <input [(ngModel)]="title" name="title" placeholder="pl. Futás, Yoga" required />
+        Edzés típusa
+        <select [(ngModel)]="title" name="title" required>
+            <option value="">-- Válassz edzést --</option>
+            <option value="Futás">🏃 Futás</option>
+            <option value="Kerékpár">🚴 Kerékpár</option>
+            <option value="Úszás">🏊 Úszás</option>
+            <option value="Súlyzós edzés">🏋️ Súlyzós edzés</option>
+            <option value="Séta">🚶 Séta</option>
+            <option value="HIIT">⚡ HIIT</option>
+            <option value="Yoga">🧘 Yoga</option>
+            <option value="Pilates">🤸 Pilates</option>
+            <option value="Box">🥊 Box</option>
+            <option value="Zumba">💃 Zumba</option>
+            <option value="Stretching">🧎 Stretching</option>
+            <option value="Spinning">🚴 Spinning</option>
+        </select>
     </label>
 
     <label>

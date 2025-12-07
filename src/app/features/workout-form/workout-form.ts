@@ -15,30 +15,30 @@ export class WorkoutFormComponent {
   title = '';
   intensity: Workout['intensity'] = 'moderate';
   status: Workout['status'] = 'planned';
-  duration: number | null = null;  // <- ENNEK BENNE KELL LENNIE!
+  duration: number | null = null;
 
   saving = false;
 
   constructor(private workouts: WorkoutsService) { }
 
   async submit() {
-    const t = this.title.trim();
+    const t = this.title?.trim();
     if (!t) {
-      alert('Adj meg edzés nevet!');
+      alert('Válassz ki egy edzéstípust!');
       return;
     }
 
     this.saving = true;
 
-    // Átszámítás: perc → másodperc
     const durationInSeconds = this.duration ? this.duration * 60 : undefined;
 
     await this.workouts.add({
       title: t,
       intensity: this.intensity,
-      status: this.status,
+      status: this.status,        // ← NEM 'active', hanem amit választottál
       duration: durationInSeconds
     });
+
     this.saving = false;
 
     this.title = '';
@@ -48,4 +48,5 @@ export class WorkoutFormComponent {
 
     alert('Edzés hozzáadva!');
   }
+
 }

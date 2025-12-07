@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IntensityBadgeDirective } from '../../shared/intensity-badge';
 import { WorkoutsService } from '../../services/workouts';
 import { Workout } from '../../models/workout';
 import { Subscription, interval } from 'rxjs';
@@ -9,7 +8,7 @@ import { TitleFilterPipe } from '../../shared/title-filter-pipe';
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, TitleFilterPipe, IntensityBadgeDirective],
+  imports: [CommonModule, TitleFilterPipe],
   templateUrl: './board.html',
   styleUrls: ['./board.css']
 })
@@ -79,12 +78,20 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   async moveRight(w: Workout): Promise<void> {
+    const currentStatus = w.status;
+
     const next =
       w.status === 'planned' ? 'active' :
         w.status === 'active' ? 'completed' :
           'completed';
+
     await this.workouts.update(w.id, { status: next });
+
+    if (currentStatus === 'planned' && next === 'active') {
+      await this.startTimer({ ...w, status: next });
+    }
   }
+
 
   async deleteWorkout(w: Workout): Promise<void> {
     if (confirm(`Törlöd: ${w.title}?`)) {
@@ -96,10 +103,10 @@ export class BoardComponent implements OnInit, OnDestroy {
     await this.workouts.update(w.id, {
       isRunning: true,
       startTime: Date.now(),
-      duration: w.duration || 0,
-      status: 'active'
+      duration: w.duration || 0
     });
   }
+
 
   async stopTimer(w: Workout): Promise<void> {
     if (w.isRunning && w.startTime) {
