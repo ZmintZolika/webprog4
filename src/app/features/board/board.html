@@ -1,0 +1,89 @@
+<div class="toolbar">
+    <input type="search" placeholder="Keresés cím szerint…" (input)="onQueryChange($event)" />
+    <span *ngIf="loading()">Betöltés…</span>
+    <small class="muted">
+        Találatok: {{ (all() | titleFilter: query()).length }}
+    </small>
+</div>
+
+<div class="board">
+    <!-- TERVEZETT oszlop -->
+    <section class="col">
+        <h2>📋 Tervezett</h2>
+        <div *ngFor="let w of planned()" class="card" [appIntensityBadge]="w.intensity">
+            <header>
+                <strong>#{{ w.id }}</strong>
+                <select [value]="w.intensity" (change)="onIntensityChange(w, $event)">
+                    <option value="light">könnyű</option>
+                    <option value="moderate">közepes</option>
+                    <option value="intense">intenzív</option>
+                </select>
+            </header>
+            <p>{{ w.title }}</p>
+
+            <div class="timer">
+                <strong>{{ getDisplayTime(w) }}</strong>
+                <button *ngIf="!w.isRunning" class="start" (click)="startTimer(w)">▶ Indít</button>
+                <button *ngIf="w.isRunning" class="stop" (click)="stopTimer(w)">⏸ STOP</button>
+            </div>
+
+            <footer>
+                <button *ngIf="!w.isRunning" (click)="moveRight(w)">▶</button>
+                <button class="del" (click)="deleteWorkout(w)">🗑️</button>
+            </footer>
+        </div>
+    </section>
+
+    <!-- AKTÍV oszlop -->
+    <section class="col">
+        <h2>⚡ Aktív</h2>
+        <div *ngFor="let w of active()" class="card" [appIntensityBadge]="w.intensity">
+            <header>
+                <strong>#{{ w.id }}</strong>
+                <select [value]="w.intensity" (change)="onIntensityChange(w, $event)">
+                    <option value="light">könnyű</option>
+                    <option value="moderate">közepes</option>
+                    <option value="intense">intenzív</option>
+                </select>
+            </header>
+            <p>{{ w.title }}</p>
+
+            <div class="timer">
+                <strong>{{ getDisplayTime(w) }}</strong>
+                <button *ngIf="!w.isRunning" class="start" (click)="startTimer(w)">▶ Indít</button>
+                <button *ngIf="w.isRunning" class="stop" (click)="stopTimer(w)">⏸ STOP</button>
+            </div>
+
+            <footer>
+                <button *ngIf="!w.isRunning" (click)="moveLeft(w)">◀</button>
+                <button *ngIf="!w.isRunning" (click)="moveRight(w)">▶</button>
+                <button class="del" (click)="deleteWorkout(w)">🗑️</button>
+            </footer>
+        </div>
+    </section>
+
+    <!-- BEFEJEZETT oszlop -->
+    <section class="col">
+        <h2>✅ Befejezett</h2>
+        <div *ngFor="let w of completed()" class="card" [appIntensityBadge]="w.intensity">
+            <header>
+                <strong>#{{ w.id }}</strong>
+                <select [value]="w.intensity" (change)="onIntensityChange(w, $event)">
+                    <option value="light">könnyű</option>
+                    <option value="moderate">közepes</option>
+                    <option value="intense">intenzív</option>
+                </select>
+            </header>
+            <p>{{ w.title }}</p>
+
+            <div class="timer">
+                <strong>{{ getDisplayTime(w) }}</strong>
+            </div>
+
+            <footer>
+                <button *ngIf="!w.isRunning" (click)="moveLeft(w)">◀</button>
+                <button class="del" (click)="deleteWorkout(w)">🗑️</button>
+            </footer>
+        </div>
+    </section>
+</div>

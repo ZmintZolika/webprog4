@@ -1,0 +1,31 @@
+<form (ngSubmit)="submit()" class="form">
+    <label>
+        Edzés neve
+        <input [(ngModel)]="title" name="title" placeholder="pl. Futás, Yoga" required />
+    </label>
+
+    <label>
+        Intenzitás
+        <select [(ngModel)]="intensity" name="intensity">
+            <option value="light">könnyű</option>
+            <option value="moderate">közepes</option>
+            <option value="intense">intenzív</option>
+        </select>
+    </label>
+
+    <label>
+        Állapot
+        <select [(ngModel)]="status" name="status">
+            <option value="planned">tervezett</option>
+            <option value="active">aktív</option>
+            <option value="completed">befejezett</option>
+        </select>
+    </label>
+
+    <label>
+        Időtartam (perc)
+        <input [(ngModel)]="duration" name="duration" type="number" placeholder="pl. 30" min="0" />
+    </label>
+
+    <button class="btn" type="submit" [disabled]="saving">Hozzáadás</button>
+</form>

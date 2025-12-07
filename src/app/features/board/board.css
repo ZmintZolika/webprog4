@@ -1,0 +1,184 @@
+.toolbar {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #1e1e1e;
+    border-radius: 12px;
+    border: 1px solid #2a2a2a;
+}
+
+.toolbar input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    background: #2a2a2a;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.toolbar input:focus {
+    outline: none;
+    border-color: #4a9eff;
+}
+
+.toolbar input::placeholder {
+    color: #707070;
+}
+
+.muted {
+    color: #9e9e9e;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.col {
+    background: #1e1e1e;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #2a2a2a;
+    min-height: 300px;
+}
+
+.col h2 {
+    margin: 0 0 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.card {
+    background: #2a2a2a;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    border: 1px solid #3a3a3a;
+    transition: all 0.2s;
+}
+
+.card:hover {
+    border-color: #4a4a4a;
+    transform: translateY(-2px);
+}
+
+.card header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.card header strong {
+    color: #4a9eff;
+    font-size: 0.85rem;
+}
+
+.card header select {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #3a3a3a;
+    border-radius: 6px;
+    background: #1e1e1e;
+    color: #b0b0b0;
+    font-size: 0.8rem;
+}
+
+.card p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+.timer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.75rem 0;
+    padding: 0.75rem;
+    background: #1e1e1e;
+    border-radius: 8px;
+}
+
+.timer strong {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #4a9eff;
+    font-family: 'Courier New', monospace;
+    min-width: 60px;
+}
+
+.card footer {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background: #3a3a3a;
+    color: white;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #4a4a4a;
+}
+
+button.start {
+    background: #4a9eff;
+    flex: 1;
+}
+
+button.start:hover {
+    background: #3a8eef;
+}
+
+button.stop {
+    background: #ff5252;
+    flex: 1;
+}
+
+button.stop:hover {
+    background: #e04242;
+}
+
+button.del {
+    background: #d32f2f;
+}
+
+button.del:hover {
+    background: #b71c1c;
+}
+
+@media (max-width: 1024px) {
+    .board {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .card footer {
+        flex-wrap: wrap;
+    }
+
+    button {
+        flex: 1;
+    }
+}
