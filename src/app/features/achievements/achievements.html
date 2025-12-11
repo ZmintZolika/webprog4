@@ -1,0 +1,21 @@
+<div class="achievements">
+    <h2>🏆 Jelvények</h2>
+
+    <div class="list">
+        <div class="achievement" *ngFor="let a of achievements" [class.locked]="!a.unlocked">
+            <div class="icon">
+                {{ a.icon }}
+            </div>
+            <div class="content">
+                <h3>{{ a.title }}</h3>
+                <p>{{ a.description }}</p>
+                <small *ngIf="a.unlocked; else lockedText">
+                    Feloldva: {{ a.unlockedAt | date:'yyyy.MM.dd HH:mm' }}
+                </small>
+                <ng-template #lockedText>
+                    <small>Még nincs feloldva</small>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
